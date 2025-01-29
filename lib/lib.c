@@ -25,6 +25,6 @@ const char *get_file_extension(const char *file_name)
 
     return dot + 1;
 
-    return;
     
+
 }
