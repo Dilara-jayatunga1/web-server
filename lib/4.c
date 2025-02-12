@@ -2,93 +2,36 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
-#define MAX_N 1003  // Setting slightly higher than max constraint
+#define MAX_VERTICES 6
 
-typedef struct {
-    int locations[MAX_N];
-    int front, rear;
-} Queue;
+void dfs(int start_node, int adj_matrix[][MAX_VERTICES], bool visited[], char vertices[]) {
+    visited[start_node] = true;
+    printf("%c ", vertices[start_node]);
 
-// Initialize queue
-void initQueue(Queue* q) {
-    q->front = 0;
-    q->rear = 0;
-}
-
-// Check if queue is empty
-bool isQueueEmpty(Queue* q) {
-    return q->front == q->rear;
-}
-
-// Enqueue function
-void enqueue(Queue* q, int value) {
-    q->locations[q->rear++] = value;
-}
-
-// Dequeue function
-int dequeue(Queue* q) {
-    return q->locations[q->front++];
+    for (int i = 0; i < MAX_VERTICES; i++) {
+        if (adj_matrix[start_node][i] == 1 && !visited[i]) {
+            dfs(i, adj_matrix, visited, vertices); // Corrected: Pass 'vertices' argument
+        }
+    }
 }
 
 int main() {
-    int N, M, K, C;
-    scanf("%d %d %d %d", &N, &M, &K, &C);
+    int adj_matrix[MAX_VERTICES][MAX_VERTICES] = {
+        {0, 1, 1, 1, 0, 0}, 
+        {0, 0, 0, 0, 0, 0}, 
+        {0, 0, 0, 1, 0, 1}, 
+        {0, 0, 0, 0, 1, 0}, 
+        {0, 0, 1, 0, 0, 0}, 
+        {1, 0, 0, 0, 0, 0}  
+    };
 
-    // Input validation
-    if (N > MAX_N) {
-        printf("Error: N exceeds maximum allowed value.\n");
-        return 1;
-    }
+    char vertices[] = {'s', 'a', 'c', 'b', 'd', 'e'};
+    bool visited[MAX_VERTICES] = {false};
+    int start_node = 0;
 
-    // Adjacency list instead of matrix (avoids segmentation fault for large N)
-    int **graph = (int **)malloc((N + 1) * sizeof(int *));
-    for (int i = 0; i <= N; i++) {
-        graph[i] = (int *)calloc(N + 1, sizeof(int));
-    }
-
-    // Read paths safely
-    for (int i = 0; i < M; i++) {
-        int x, y;
-        scanf("%d %d", &x, &y);
-        if (x >= 1 && x <= N && y >= 1 && y <= N) {
-            graph[x][y] = 1;
-            graph[y][x] = 1; // Bidirectional
-        }
-    }
-
-    // BFS Setup
-    bool visited[MAX_N] = {false}; 
-    int distance[MAX_N] = {0};
-    Queue q;
-    initQueue(&q);
-
-    visited[C] = true;
-    enqueue(&q, C);
-
-    int reachable_locations = 0;
-
-    // BFS Traversal
-    while (!isQueueEmpty(&q)) {
-        int current = dequeue(&q);
-        reachable_locations++;
-
-        // Traverse all connected locations
-        for (int i = 1; i <= N; i++) {
-            if (graph[current][i] == 1 && !visited[i] && distance[current] < K) {
-                visited[i] = true;
-                distance[i] = distance[current] + 1;
-                enqueue(&q, i);
-            }
-        }
-    }
-
-    printf("%d\n", reachable_locations);
-
-    // Free allocated memory
-    for (int i = 0; i <= N; i++) {
-        free(graph[i]);
-    }
-    free(graph);
+    printf("DFS traversal starting from %c: ", vertices[start_node]);
+    dfs(start_node, adj_matrix, visited, vertices); // Corrected: Pass 'vertices' argument here as well
+    printf("\n");
 
     return 0;
 }
