@@ -18,3 +18,21 @@ Detects file extensions (e.g., .html, .jpg, .png) and sets the appropriate Conte
 # Optimizations:
 Basic multithreading support to handle multiple client connections simultaneously.
 Lightweight and efficient design for learning purposes.
+
+# Run the server
+To run the server:
+``` Bash
+./server
+```
+
+Using `make`, we can build and run the server with ease.
+
+To build the server:
+``` Bash
+make build
+```
+
+To build and run the server:
+``` Bash
+make run
+```
