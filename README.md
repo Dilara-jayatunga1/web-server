@@ -11,6 +11,7 @@ Serves different files (e.g., index.html, image.jpg) based on the client's reque
 Handles requests for specific files (e.g., GET /index.html).
 # Error Handling:
 Returns a 404 Not Found response if the requested file does not exist.
+Returns a 400 Bad Request response 
 Handles basic errors like file access issues.
 Support for Multiple File Types:
 Detects file extensions (e.g., .html, .jpg, .png) and sets the appropriate Content-Type header in the HTTP response.
