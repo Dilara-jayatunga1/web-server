@@ -1,0 +1,13 @@
+---
+triple:          'arm64-apple-darwin'
+binary-path:     server
+relocations:
+  - { offset: 0x19, size: 0x8, addend: 0x0, symName: _main, symObjAddr: 0x0, symBinAddr: 0x100003288, symSize: 0x17C }
+  - { offset: 0x4A5, size: 0x8, addend: 0x0, symName: _serverSocket, symObjAddr: 0x2B94, symBinAddr: 0x100008000, symSize: 0x0 }
+  - { offset: 0x4B5, size: 0x8, addend: 0x0, symName: _getTimeString, symObjAddr: 0x758, symBinAddr: 0x1000039E0, symSize: 0x70 }
+  - { offset: 0x4FE, size: 0x8, addend: 0x0, symName: _handleSignal, symObjAddr: 0x710, symBinAddr: 0x100003998, symSize: 0x48 }
+  - { offset: 0x528, size: 0x8, addend: 0x0, symName: _getMimeType, symObjAddr: 0x514, symBinAddr: 0x10000379C, symSize: 0x1FC }
+  - { offset: 0x570, size: 0x8, addend: 0x0, symName: _getFileURL, symObjAddr: 0x428, symBinAddr: 0x1000036B0, symSize: 0xEC }
+  - { offset: 0x5CB, size: 0x8, addend: 0x0, symName: _handleRequest, symObjAddr: 0x17C, symBinAddr: 0x100003404, symSize: 0x2AC }
+  - { offset: 0x764, size: 0x8, addend: 0x0, symName: _main, symObjAddr: 0x0, symBinAddr: 0x100003288, symSize: 0x17C }
+...
